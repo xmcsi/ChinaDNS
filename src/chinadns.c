@@ -68,7 +68,7 @@ typedef struct {
 
 
 // avoid malloc and free
-#define BUF_SIZE 512
+#define BUF_SIZE 4096
 static char global_buf[BUF_SIZE];
 static char compression_buf[BUF_SIZE];
 static int verbose = 0;
@@ -200,7 +200,7 @@ int main(int argc, char **argv) {
     FD_SET(remote_sock, &errorset);
     struct timeval timeout = {
       .tv_sec = 0,
-      .tv_usec = 50 * 1000,
+      .tv_usec = 2 * 1000,
     };
     if (-1 == select(max_fd, &readset, NULL, &errorset, &timeout)) {
       ERR("select");
